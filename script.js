@@ -1,8 +1,8 @@
- const pages = document.querySelectorAll('.page');
- const navButtons = document.querySelectorAll('[data-target]');
- 
- const studyRecords = [];
- const notes = [];
+const pages = document.querySelectorAll('.page');
+const navButtons = document.querySelectorAll('[data-target]');
+
+const studyRecords = [];
+const notes = [];
 let quizzes = [];
 
 const timeForm = document.querySelector('#time-form');
@@ -32,18 +32,19 @@ function stopTimer() {
   timerId = null;
   recordToggle.textContent = '기록 시작';
 }
- 
- function showPage(targetId) {
+
+function showPage(targetId) {
   if (targetId !== 'time-tracker') {
     stopTimer();
   }
-   pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
- }
- 
- navButtons.forEach((button) => {
-   button.addEventListener('click', () => showPage(button.dataset.target));
- });
- 
+  pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
+}
+
+navButtons.forEach((button) => {
+  button.addEventListener('click', () => showPage(button.dataset.target));
+});
+
+recordToggle.addEventListener('click', () => {
   if (timerId) {
     stopTimer();
     return;
@@ -55,57 +56,58 @@ function stopTimer() {
   }, 1000);
   recordToggle.textContent = '기록 중지';
 });
- 
- timeForm.addEventListener('submit', (event) => {
-   event.preventDefault();
- 
-   const date = document.querySelector('#study-date').value;
-   const subject = document.querySelector('#study-subject').value.trim();
+
+timeForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const date = document.querySelector('#study-date').value;
+  const subject = document.querySelector('#study-subject').value.trim();
+
   studyRecords.push({ date, subject, elapsedSeconds });
-   timeForm.reset();
+  timeForm.reset();
   stopTimer();
   elapsedSeconds = 0;
   updateTimerDisplay();
-   renderTimeRecords();
- });
- 
- function renderTimeRecords() {
-   timeList.innerHTML = '';
- 
-   studyRecords.forEach((record) => {
-     const item = document.createElement('li');
+  renderTimeRecords();
+});
+
+function renderTimeRecords() {
+  timeList.innerHTML = '';
+
+  studyRecords.forEach((record) => {
+    const item = document.createElement('li');
     item.textContent = `${record.date} | ${record.subject} | ${formatDuration(record.elapsedSeconds)}`;
-     timeList.appendChild(item);
-   });
- }
- 
- const noteForm = document.querySelector('#note-form');
- const noteList = document.querySelector('#note-list');
- 
- noteForm.addEventListener('submit', (event) => {
-   event.preventDefault();
- 
-   const subject = document.querySelector('#note-subject').value.trim();
-   const content = document.querySelector('#note-content').value.trim();
- 
-   notes.push({ subject, content });
-   noteForm.reset();
-   renderNotes();
- });
- 
- function renderNotes() {
-   noteList.innerHTML = '';
- 
-   notes.forEach((note, index) => {
-     const item = document.createElement('li');
-     item.innerHTML = `<strong>${index + 1}. ${note.subject}</strong><br />${note.content}`;
-     noteList.appendChild(item);
-   });
- }
- 
- const generateQuizButton = document.querySelector('#generate-quiz');
- const quizList = document.querySelector('#quiz-list');
- 
+    timeList.appendChild(item);
+  });
+}
+
+const noteForm = document.querySelector('#note-form');
+const noteList = document.querySelector('#note-list');
+
+noteForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const subject = document.querySelector('#note-subject').value.trim();
+  const content = document.querySelector('#note-content').value.trim();
+
+  notes.push({ subject, content });
+  noteForm.reset();
+  renderNotes();
+});
+
+function renderNotes() {
+  noteList.innerHTML = '';
+
+  notes.forEach((note, index) => {
+    const item = document.createElement('li');
+    item.innerHTML = `<strong>${index + 1}. ${note.subject}</strong><br />${note.content}`;
+    noteList.appendChild(item);
+  });
+}
+
+const generateQuizButton = document.querySelector('#generate-quiz');
+const quizList = document.querySelector('#quiz-list');
+
 function buildAnswer(content) {
   return content
     .split(/[.!?\n]/)
@@ -154,23 +156,23 @@ function renderQuizzes() {
   });
 }
 
- generateQuizButton.addEventListener('click', () => {
-   quizList.innerHTML = '';
- 
-   if (notes.length === 0) {
-     const empty = document.createElement('li');
-     empty.textContent = '먼저 과목별 내용 정리를 저장해주세요.';
-     quizList.appendChild(empty);
-     return;
-   }
- 
+generateQuizButton.addEventListener('click', () => {
+  quizList.innerHTML = '';
+
+  if (notes.length === 0) {
+    const empty = document.createElement('li');
+    empty.textContent = '먼저 과목별 내용 정리를 저장해주세요.';
+    quizList.appendChild(empty);
+    return;
+  }
+
   quizzes = notes.map((note) => ({
     subject: note.subject,
     question: `${note.content.slice(0, 35)}... 의 핵심 한 문장을 입력하세요.`,
     answer: buildAnswer(note.content),
   }));
 
-+  renderQuizzes();
- });
-+
-+updateTimerDisplay();
+  renderQuizzes();
+});
+
+updateTimerDisplay();
