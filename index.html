@@ -3,14 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>학습 정리 도우미</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="hero">
-      <h1>학습 정리 도우미</h1>
-      <p>기본 페이지에서 원하는 기능으로 바로 이동하세요.</p>
-    </header>
+     <title>학습 정리 도우미</title>
+     <link rel="stylesheet" href="styles.css" />
+   </head>
+   <body>
+     <header class="hero">
+       <h1>학습 정리 도우미</h1>
+       <p>기본 페이지에서 원하는 기능으로 바로 이동하세요.</p>
+     </header>
+ 
+     <main class="container">
+       <section id="home" class="page active" aria-labelledby="home-title">
+         <h2 id="home-title">기본 페이지</h2>
+         <p>아래 카드 중 하나를 선택해 기능 화면으로 이동할 수 있습니다.</p>
+         <div class="grid">
+          <button type="button" class="card" data-target="time-tracker">시간 기록</button>
+          <button type="button" class="card" data-target="subject-notes">과목별 내용 정리</button>
+          <button type="button" class="card" data-target="quiz-generator">정리 내용 기반 문제 출제</button>
+         </div>
+       </section>
+ 
+       <section id="time-tracker" class="page" aria-labelledby="time-title">
+         <div class="section-head">
+           <h2 id="time-title">시간 기록</h2>
+           <button type="button" class="back" data-target="home">기본 페이지로</button>
+         </div>
 
     <main class="container">
       <section id="home" class="page active" aria-labelledby="home-title">
@@ -65,7 +82,43 @@
         </form>
         <ul id="note-list" class="list"></ul>
       </section>
+         <form id="time-form" class="stack">
+           <label>
+             날짜
+             <input type="date" id="study-date" required />
+           </label>
+           <label>
+             과목
+             <input type="text" id="study-subject" placeholder="예: 수학" required />
+           </label>
 
+          <p id="timer-display">00시간 00분 00초</p>
+          <button type="button" id="record-toggle">기록 시작</button>
+          <button type="submit">기록 저장</button>
+         </form>
+
+         <ul id="time-list" class="list"></ul>
+       </section>
+ 
+       <section id="subject-notes" class="page" aria-labelledby="notes-title">
+         <div class="section-head">
+           <h2 id="notes-title">과목별 내용 정리</h2>
+          <button type="button" class="back" data-target="home">기본 페이지로</button>
+         </div>
+         <form id="note-form" class="stack">
+           <label>
+             과목
+             <input type="text" id="note-subject" placeholder="예: 과학" required />
+           </label>
+           <label>
+             정리 내용
+             <textarea id="note-content" rows="4" placeholder="핵심 내용을 입력하세요" required></textarea>
+           </label>
+           <button type="submit">정리 저장</button>
+         </form>
+         <ul id="note-list" class="list"></ul>
+       </section>
+ 
       <section id="quiz-generator" class="page" aria-labelledby="quiz-title">
         <div class="section-head">
           <h2 id="quiz-title">정리 내용에서 문제 출제</h2>

@@ -168,7 +168,7 @@ generateQuizButton.addEventListener('click', () => {
 
   quizzes = notes.map((note) => ({
     subject: note.subject,
-    question: `다음 내용을 대표하는 핵심 문장은 무엇인가요? (힌트: ${note.content.slice(0, 35)}...)`,
+    question: `${note.content.slice(0, 35)}... 의 핵심 한 문장을 입력하세요.`,
     answer: buildAnswer(note.content),
   }));
 
