@@ -1,0 +1,105 @@
+:root {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  color: #17202a;
+  background: #f4f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.hero {
+  background: #3347b0;
+  color: #fff;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.page {
+  display: none;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+}
+
+.page.active {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.card,
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: #3347b0;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+}
+
+.card {
+  min-height: 90px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back {
+  background: #657592;
+}
+
+.stack {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid #d2d9e5;
+  border-radius: 8px;
+  padding: 0.6rem;
+  font: inherit;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.list li {
+  border: 1px solid #e2e7f1;
+  border-radius: 8px;
+  padding: 0.7rem;
+  background: #f9fbff;
+}
